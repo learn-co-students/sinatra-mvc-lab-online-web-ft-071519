@@ -1,19 +1,16 @@
+require 'pry'
+
 class PigLatinizer
+
  
-  attr_accessor :text
- 
-  def initialize()
-  
-  end
-  
-   
- 
-  
   
   def piglatinizeText(text)
+    
     newArray = []
-    text.each do|word|
-      newArray << word.piglatinize
+    text.split(" ").each do|word|
+   
+      newArray << piglatinize(word)
+      
     end
     newArray.join(" ")
   end
@@ -69,4 +66,8 @@ end
 result.join(' ')
   end
 end
+
+
+  
+
 
