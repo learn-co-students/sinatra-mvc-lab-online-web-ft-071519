@@ -1,14 +1,22 @@
 class PigLatinizer
- attr_reader :newArray
  
-  # def initialize(text)
-  #   @textarray = text.split(" ")
-  #   @newarray = []
-  #   @textarray.each do|str|
-  #     @newarray << str.piglatinize
-  #   end
-  #   @newarray.join
-  # end
+  attr_accessor :text
+ 
+  def initialize()
+  
+  end
+  
+   
+ 
+  
+  
+  def piglatinizeText(text)
+    newArray = []
+    text.each do|word|
+      newArray << word.piglatinize
+    end
+    newArray.join(" ")
+  end
   
   def piglatinize(sent)
 
