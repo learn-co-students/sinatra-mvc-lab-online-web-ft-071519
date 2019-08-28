@@ -1,40 +1,35 @@
 require 'pry'
 class PigLatinizer
   def consonant(letter)
-    true if letter != /[aeiouAEIOU]/
+    !letter.match(/[aeiouAEIOU]/)
   end
 
-  def piglatinize2(word)
-    if consonant(word[0]) == false
-      word_array = word.split('')
-      word_array.push('way')
-      word = word_array.join('')
-    elsif consonant(word[0]) == true && consonant(word[1]) == false
-      word = word[1..-1] + word[0] + 'ay'
-    end
-    word
-  end
+  def piglatinize_word(word)
 
-  def piglatinize(word)
-    array = word.split('')
-    if consonant(array[0]) == false
-      array.push('way')
-    elsif consonant(array[0]) == true && consonant(word[1]) == false
-      cut = array.slice![0]
-      array << cut
-      array << 'ay'
-
+    if !consonant(word[0])
+      word += 'w'
+    elsif consonant(word[0]) && !consonant(word[1])
+      word = word[1..-1] + word[0]
+    elsif consonant(word[0]) && consonant(word[1]) && !consonant(word[2])
+      word = word[2..-1] + word[0..1]
+    elsif consonant(word[0]) && consonant(word[1]) && consonant(word[2]) && !consonant(word[3])
+      word = word[3..-1] + word[0..2]
     end
-    array.join('')
+    word << 'ay'
   end
 
   def piglatinize_string(string)
-    array = string.split(' ')
-    new_array = []
-    array.each do |word|
-      new_array << piglatinize(word)
+    string.split.collect do |word|
+      piglatinize_word(word)
+    end.join(' ')
+  end
+
+  def piglatinize(string)
+    if string.split(' ').length == 1
+      piglatinize_word(string)
+    else
+      piglatinize_string(string)
     end
-    new_array.join(' ')
   end
 
 
